@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3: Game Đoán Số</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="guess-game-container">
+        <h1>Trò Chơi Đoán Số (1-100)</h1>
+        <p>Nhập số bạn đoán:</p>
+        <div class="input-area">
+            <input type="number" id="guess-input" min="1" max="100" placeholder="Nhập số..." required>
+            <button id="submit-guess">Đoán</button>
+        </div>
+        
+        <p id="result-text" class="message"></p>
+        <p id="attempts-count">Số lần thử: 0</p>
+        <button id="new-game-btn">Chơi Lại</button>
+
+        <div id="confetti-container"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

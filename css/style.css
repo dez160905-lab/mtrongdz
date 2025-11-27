@@ -1,0 +1,229 @@
+/* Bài 1: Carousel */
+.carousel-container {
+    max-width: 800px;
+    margin: 50px auto;
+    position: relative;
+    overflow: hidden; /* Cực kỳ quan trọng để ẩn các slide không hiển thị */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-slide-wrapper {
+    display: flex;
+    /* Dùng transform để chuyển slide, tối ưu hiệu năng hơn dùng left/margin */
+    transform: translateX(0); 
+    transition: transform 0.5s ease-in-out; /* CSS transition cho hiệu ứng trượt */
+    width: 100%; /* Cần đảm bảo chiều rộng */
+}
+
+.carousel-img {
+    min-width: 100%; /* Mỗi hình chiếm 100% chiều rộng của container */
+    height: auto;
+    display: block;
+    flex-shrink: 0; /* Quan trọng: Ngăn hình ảnh co lại */
+    object-fit: cover; /* Đảm bảo hình ảnh được căn chỉnh tốt trong khung */
+}
+
+/* Nút điều hướng */
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5em;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .carousel-container {
+        max-width: 100%;
+        margin: 20px 0;
+    }
+    .prev-btn, .next-btn {
+        padding: 5px 10px;
+        font-size: 1.2em;
+    }
+}
+/* Bài 2: Todo List */
+.todo-app-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#todo-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#add-todo-btn {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-todo-btn:hover {
+    background-color: #45a049;
+}
+
+/* Sử dụng CSS Grid cho danh sách hiển thị */
+.todo-grid {
+    display: grid;
+    /* Chia lưới 1 cột, mỗi task là 1 hàng */
+    grid-template-columns: 1fr; 
+    gap: 10px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.todo-text {
+    flex-grow: 1;
+    word-break: break-word; /* Xử lý tràn chữ */
+}
+
+.todo-actions button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.edit-btn { background-color: #2196F3; color: white; }
+.delete-btn { background-color: #f44336; color: white; }
+
+/* Trạng thái Edit */
+.todo-item.editing .todo-text { display: none; }
+.todo-item:not(.editing) .edit-input { display: none; }
+
+.edit-input {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #2196F3;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+/* Bài 3: Game Đoán Số */
+.guess-game-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    position: relative;
+}
+
+#guess-input {
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#submit-guess, #new-game-btn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submit-guess:hover, #new-game-btn:hover {
+    background-color: #e68900;
+}
+
+#result-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 15px 0;
+    min-height: 20px; /* Giữ chỗ để tránh layout nhảy */
+}
+
+/* --- Confetti Animation (Đơn giản bằng CSS) --- */
+#confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Quan trọng: cho phép click xuyên qua */
+    z-index: 20;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: currentColor; /* Dùng currentColor để dễ thay đổi màu */
+    opacity: 1;
+    animation: fall 3s linear infinite;
+    border-radius: 2px;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
